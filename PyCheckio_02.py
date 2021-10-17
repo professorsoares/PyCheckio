@@ -10,13 +10,24 @@ def first_word_1(text: str):
     return text[:index] if index != -1 else text
 
 
+def first_word_3(text: str) -> str:
+    i = 0
+    while i < len(text) and text[i] != ' ':
+        i += 1
+    return text[:i]
+
+first_word_2 = lambda s: s.split()[0]
+
+
 def say(text1: str):  # (var: from type string)
     return text1.split(" ")[0]
+
 
 
 if __name__ == '__main__':
     print("Example:")
     print(first_word("Hello world"))
+    print("----------------------------------------------")
 
     print(t('first_word(x)', setup='x = "asdf we"*10', number=10000, globals=globals())*1000)  # ~13.1 ms
     print(t('first_word(x)', setup='x = "asdfawe"*10', number=10000, globals=globals()) * 1000)  # ~71.1 ms
@@ -28,6 +39,18 @@ if __name__ == '__main__':
     print(t('first_word_1(x)', setup='x = "asdfawe"*10', number=10000, globals=globals()) * 1000)  # ~71.1 ms
     print(t('first_word_1(x)', setup='x = "asdf we"*100000', number=10000, globals=globals()) * 1000)  # ~13.1 ms
     print(t('first_word_1(x)', setup='x = "asdfawe"*100000', number=10000, globals=globals()) * 1000)  # ~788793.7 ms
+    print("----------------------------------------------")
+
+    print(t('first_word_2(x)', setup='x = "asdf we"*10', number=10000, globals=globals()) * 1000)  # ~13.1 ms
+    print(t('first_word_2(x)', setup='x = "asdfawe"*10', number=10000, globals=globals()) * 1000)  # ~71.1 ms
+    print(t('first_word_2(x)', setup='x = "asdf we"*100000', number=10000, globals=globals()) * 1000)  # ~13.1 ms
+    print(t('first_word_2(x)', setup='x = "asdfawe"*100000', number=10000, globals=globals()) * 1000)  # ~788793.7 ms
+    print("----------------------------------------------")
+
+    print(t('first_word_3(x)', setup='x = "asdf we"*10', number=10000, globals=globals()) * 1000)  # ~13.1 ms
+    print(t('first_word_3(x)', setup='x = "asdfawe"*10', number=10000, globals=globals()) * 1000)  # ~71.1 ms
+    print(t('first_word_3(x)', setup='x = "asdf we"*100000', number=10000, globals=globals()) * 1000)  # ~13.1 ms
+    print(t('first_word_3(x)', setup='x = "asdfawe"*100000', number=10000, globals=globals()) * 1000)  # ~788793.7 ms
 
     # These "asserts" are used for self-checking and not for an auto-testing
     assert first_word("Hello world") == "Hello"
